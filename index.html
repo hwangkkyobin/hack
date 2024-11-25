@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacking Simulation</title>
+  <style>
+    body {
+      background: black;
+      color: green;
+      font-family: monospace;
+      font-size: 14px;
+      overflow: hidden;
+    }
+    #console {
+      white-space: pre-wrap;
+      overflow: hidden;
+      height: 100vh;
+      padding: 20px;
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="console"></div>
+  <script>
+    const consoleElement = document.getElementById('console');
+    const fakeCommands = [
+      "Initializing virtual environment...",
+      "Connecting to remote server [192.168.0.1]...",
+      "Bypassing firewall...",
+      "Accessing database...",
+      "Extracting sensitive information...",
+      "Uploading payload...",
+      "Encryption protocol activated...",
+      "Data extraction: 50% complete...",
+      "Data extraction: 100% complete!",
+      "Disconnecting from server...",
+      "Operation successful! Exiting..."
+    ];
+
+    let index = 0;
+
+    function addText(text) {
+      consoleElement.textContent += text + "\n";
+      consoleElement.scrollTop = consoleElement.scrollHeight;
+    }
+
+    function typeCommand() {
+      if (index < fakeCommands.length) {
+        const command = fakeCommands[index];
+        addText("> " + command);
+        index++;
+        setTimeout(typeCommand, Math.random() * 800 + 200); // Random typing speed
+      } else {
+        addText("\n> Operation Complete.");
+        addText("Press Ctrl+C to exit.");
+        const cursor = document.createElement("span");
+        cursor.textContent = "_";
+        cursor.classList.add("blink");
+        consoleElement.appendChild(cursor);
+      }
+    }
+
+    typeCommand();
+  </script>
+</body>
+</html>
